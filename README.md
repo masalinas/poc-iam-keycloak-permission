@@ -145,7 +145,7 @@ Content-Type: application/x-www-form-urlencoded
 audience: backend-permission (the same as client_id)
 grant_type: urn:ietf:params:oauth:grant-type:uma-ticket
 permission: client-resource#create (RESOURCE_NAME#SCOPE_NAME)
-response_mode: decision (reseume reponse)
+response_mode: decision (resume reponse, it's optional)
 ```
 
 ![User scope validated results](captures/postman_validate_admin_user.png "Evaluate User scopes")
@@ -154,14 +154,17 @@ response_mode: decision (reseume reponse)
 
 ![User scope validated results](captures/postman_validate_user_user.png "Evaluate User scopes")
 
-Other request is recover all permissions of the operator user for example
+Other request is recover all permissions from the RPT (Requesting Party Token)
 
 ```shell
 http://localhost:8080/auth/realms/poc/protocol/openid-connect/token
 
+Bearer Token: Access Token obtained in the previous step
+
 Content-Type: application/x-www-form-urlencoded
 audience: backend-permission (the same as client_id)
 grant_type: urn:ietf:params:oauth:grant-type:uma-ticket
+permission: client-resource#view (it's optional)
 ```
 
 We obtain a UMA-Token and JWT with this information
