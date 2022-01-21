@@ -427,7 +427,8 @@
           "containerId": "4069244b-802c-4e7a-9a47-5c2e96f7f622",
           "attributes": {}
         }
-      ]
+      ],
+      "frontend-permission": []
     }
   },
   "groups": [],
@@ -653,18 +654,18 @@
     {
       "id": "f6718ae7-1609-4219-a29d-5015e017eff6",
       "clientId": "backend-permission",
-      "rootUrl": "http://localhost:3000",
-      "adminUrl": "http://localhost:3000",
+      "rootUrl": "http://localhost:8081",
+      "adminUrl": "http://localhost:8081",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "http://localhost:3000/*"
+        "http://localhost:8081/*"
       ],
       "webOrigins": [
-        "http://localhost:3000"
+        "http://localhost:8081"
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -1055,6 +1056,51 @@
       "authenticationFlowBindingOverrides": {},
       "fullScopeAllowed": false,
       "nodeReRegistrationTimeout": 0,
+      "defaultClientScopes": [
+        "web-origins",
+        "roles",
+        "profile",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access",
+        "microprofile-jwt"
+      ]
+    },
+    {
+      "id": "8ddedbe2-1fc1-45ec-aed2-5155513767a5",
+      "clientId": "frontend-permission",
+      "rootUrl": "http://localhost:3000",
+      "adminUrl": "http://localhost:3000",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "redirectUris": [
+        "http://localhost:3000/*"
+      ],
+      "webOrigins": [
+        "http://localhost:3000"
+      ],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "publicClient": true,
+      "frontchannelLogout": false,
+      "protocol": "openid-connect",
+      "attributes": {
+        "backchannel.logout.session.required": "true",
+        "backchannel.logout.revoke.offline.tokens": "false"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": true,
+      "nodeReRegistrationTimeout": -1,
       "defaultClientScopes": [
         "web-origins",
         "roles",

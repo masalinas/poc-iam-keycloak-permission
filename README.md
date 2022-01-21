@@ -124,7 +124,7 @@ Before validate the client resources from keycloak we are going to debug our cli
 http://localhost:8080/auth/realms/poc/protocol/openid-connect/token
 
 Content-Type: application/x-www-form-urlencoded
-client_id: backend-permission
+client_id: frontend-permission
 client_secret: 28nXT8EyAfH7h66YS3fOCsLhojfY4x6N
 grant_type: password
 username: admin
