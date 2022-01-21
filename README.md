@@ -9,8 +9,10 @@ Create a realm to group all security entities: client, roles and permissions
 
 ![Create a realm](captures/create_realm.png "Create a realm")
 
-- Create a client with cliend id: **backend-permission**
-We must create a client of type confidential and active the Authorization flag lñike this
+- Create a clients with cliend id:  **frontend-permission**, **backend-permission**
+We must create two clients:
+ **frontend-permission** of public type -> to login and recover Access Tokens 
+ **backend-permission** of confidential type with the flag Authorization Enabled activated -> to recover permissins and validate then against resources
 
 ![Create a client](captures/create_client.png "Create a client")
 
