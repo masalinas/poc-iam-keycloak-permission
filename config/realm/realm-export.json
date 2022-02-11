@@ -1,7 +1,7 @@
 {
   "id": "oliveRealm",
   "realm": "poc",
-  "notBefore": 0,
+  "notBefore": 1644576825,
   "defaultSignatureAlgorithm": "RS256",
   "revokeRefreshToken": false,
   "refreshTokenMaxReuse": 0,
@@ -150,8 +150,8 @@
                 "manage-clients",
                 "manage-events",
                 "manage-identity-providers",
-                "view-identity-providers",
                 "view-authorization",
+                "view-identity-providers",
                 "create-client",
                 "manage-realm",
                 "view-events",
@@ -326,7 +326,10 @@
         }
       ],
       "security-admin-console": [],
-      "backend-permission": [
+      "poc-frontend": [],
+      "admin-cli": [],
+      "account-console": [],
+      "poc-backend": [
         {
           "id": "28195a86-3606-4521-aa4d-819c0d48645b",
           "name": "uma_protection",
@@ -336,8 +339,6 @@
           "attributes": {}
         }
       ],
-      "admin-cli": [],
-      "account-console": [],
       "broker": [
         {
           "id": "e470a115-f007-4c2e-8816-ff13f978a17c",
@@ -427,8 +428,7 @@
           "containerId": "4069244b-802c-4e7a-9a47-5c2e96f7f622",
           "attributes": {}
         }
-      ],
-      "frontend-permission": []
+      ]
     }
   },
   "groups": [],
@@ -443,7 +443,6 @@
   "requiredCredentials": [
     "password"
   ],
-  "passwordPolicy": "hashAlgorithm(bcrypt) and hashIterations(5)",
   "otpPolicyType": "totp",
   "otpPolicyAlgorithm": "HmacSHA1",
   "otpPolicyInitialCounter": 0,
@@ -482,18 +481,18 @@
     {
       "id": "0777f15c-1e17-4918-af3a-efe26ff7540b",
       "createdTimestamp": 1642530382976,
-      "username": "service-account-backend-permission",
+      "username": "service-account-poc-backend",
       "enabled": true,
       "totp": false,
       "emailVerified": false,
-      "serviceAccountClientId": "backend-permission",
+      "serviceAccountClientId": "poc-backend",
       "disableableCredentialTypes": [],
       "requiredActions": [],
       "realmRoles": [
         "default-roles-oliverealm"
       ],
       "clientRoles": {
-        "backend-permission": [
+        "poc-backend": [
           "uma_protection"
         ]
       },
@@ -652,8 +651,45 @@
       ]
     },
     {
+      "id": "34ee99d0-2cad-448b-92d7-e4150c996692",
+      "clientId": "broker",
+      "name": "${client_broker}",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "redirectUris": [],
+      "webOrigins": [],
+      "notBefore": 0,
+      "bearerOnly": true,
+      "consentRequired": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "publicClient": false,
+      "frontchannelLogout": false,
+      "protocol": "openid-connect",
+      "attributes": {},
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": false,
+      "nodeReRegistrationTimeout": 0,
+      "defaultClientScopes": [
+        "web-origins",
+        "roles",
+        "profile",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access",
+        "microprofile-jwt"
+      ]
+    },
+    {
       "id": "f6718ae7-1609-4219-a29d-5015e017eff6",
-      "clientId": "backend-permission",
+      "clientId": "poc-backend",
       "rootUrl": "http://localhost:8081",
       "adminUrl": "http://localhost:8081",
       "surrogateAuthRequired": false,
@@ -714,6 +750,7 @@
           "consentRequired": false,
           "config": {
             "user.session.note": "clientHost",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientHost",
@@ -728,6 +765,7 @@
           "consentRequired": false,
           "config": {
             "user.session.note": "clientId",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientId",
@@ -742,6 +780,7 @@
           "consentRequired": false,
           "config": {
             "user.session.note": "clientAddress",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientAddress",
@@ -766,78 +805,8 @@
         "policyEnforcementMode": "ENFORCING",
         "resources": [
           {
-            "name": "Default Resource",
-            "type": "urn:olive-front:resources:default",
-            "ownerManagedAccess": false,
-            "attributes": {},
-            "_id": "39423a38-0ea2-49ee-9f40-27cdf7cb3502",
-            "uris": [
-              "/*"
-            ]
-          },
-          {
-            "name": "product-admin",
-            "type": "urn:olive-front:resources:product",
-            "ownerManagedAccess": false,
-            "displayName": "Product Admin Resource",
-            "attributes": {},
-            "_id": "24adfc8f-af57-4bd1-9e79-a0f67802bf97",
-            "uris": [
-              "/products/*"
-            ],
-            "scopes": [
-              {
-                "name": "view"
-              },
-              {
-                "name": "edit"
-              },
-              {
-                "name": "delete"
-              },
-              {
-                "name": "create"
-              }
-            ]
-          },
-          {
-            "name": "product-user",
-            "type": "urn:olive-front:resources:product",
-            "ownerManagedAccess": false,
-            "displayName": "Product User Resource",
-            "attributes": {},
-            "_id": "5924e978-2cff-4ae5-b81f-d8bd15165664",
-            "uris": [
-              "/products/*"
-            ],
-            "scopes": [
-              {
-                "name": "view"
-              }
-            ]
-          },
-          {
-            "name": "product-operator",
-            "type": "urn:olive-front:resources:product",
-            "ownerManagedAccess": false,
-            "displayName": "Product Operator Resource",
-            "attributes": {},
-            "_id": "cbf047eb-21c0-4dc0-ac79-cdf9a34b6019",
-            "uris": [
-              "/products/*"
-            ],
-            "scopes": [
-              {
-                "name": "view"
-              },
-              {
-                "name": "edit"
-              }
-            ]
-          },
-          {
             "name": "client-resource",
-            "type": "urn:olive-front:resources:client",
+            "type": "urn:poc-frontend:resources:client",
             "ownerManagedAccess": false,
             "displayName": "Client Resource",
             "attributes": {},
@@ -859,23 +828,37 @@
                 "name": "create"
               }
             ]
+          },
+          {
+            "name": "product-resource",
+            "type": "urn:poc-frontend:resources:product",
+            "ownerManagedAccess": false,
+            "displayName": "Product Resource",
+            "attributes": {},
+            "_id": "1fe9bb54-4f9a-45cc-9758-3703b0294e5f",
+            "uris": [
+              "/products/*"
+            ],
+            "scopes": [
+              {
+                "name": "view"
+              },
+              {
+                "name": "edit"
+              },
+              {
+                "name": "delete"
+              },
+              {
+                "name": "create"
+              }
+            ]
           }
         ],
         "policies": [
           {
-            "id": "22fed581-7100-4e77-85f7-3c8214dbded1",
-            "name": "Default Policy",
-            "description": "A policy that grants access only for users within this realm",
-            "type": "js",
-            "logic": "POSITIVE",
-            "decisionStrategy": "AFFIRMATIVE",
-            "config": {
-              "code": "// by default, grants any permission associated with this policy\n$evaluation.grant();\n"
-            }
-          },
-          {
             "id": "18c611eb-5721-41f5-b72b-171f115eb79e",
-            "name": "admin",
+            "name": "Admin Policy",
             "description": "Policy that grants access only for users within admin role",
             "type": "role",
             "logic": "POSITIVE",
@@ -886,7 +869,7 @@
           },
           {
             "id": "be8f196b-d9de-40d2-afb3-342710a505b3",
-            "name": "operator",
+            "name": "Operator Policy",
             "description": "Policy that grants access only for users within operator role",
             "type": "role",
             "logic": "POSITIVE",
@@ -897,25 +880,13 @@
           },
           {
             "id": "38343816-8b1e-47d1-9f81-02d7abe17989",
-            "name": "user",
+            "name": "User Policy",
             "description": "Policy that grants access only for users within user role",
             "type": "role",
             "logic": "POSITIVE",
             "decisionStrategy": "UNANIMOUS",
             "config": {
               "roles": "[{\"id\":\"user\",\"required\":false}]"
-            }
-          },
-          {
-            "id": "b2406b66-efbf-45c0-90d4-33995b543619",
-            "name": "Default Permission",
-            "description": "A permission that applies to the default resource type",
-            "type": "resource",
-            "logic": "POSITIVE",
-            "decisionStrategy": "UNANIMOUS",
-            "config": {
-              "defaultResourceType": "urn:olive-front:resources:default",
-              "applyPolicies": "[\"Default Policy\"]"
             }
           },
           {
@@ -928,7 +899,7 @@
             "config": {
               "resources": "[\"client-resource\"]",
               "scopes": "[\"create\"]",
-              "applyPolicies": "[\"admin\"]"
+              "applyPolicies": "[\"Admin Policy\"]"
             }
           },
           {
@@ -941,19 +912,7 @@
             "config": {
               "resources": "[\"client-resource\"]",
               "scopes": "[\"delete\"]",
-              "applyPolicies": "[\"admin\"]"
-            }
-          },
-          {
-            "id": "b7a6dbcf-60dd-4611-8104-33b53615e4d5",
-            "name": "product-admin",
-            "description": "A permission that applies to the product resource type with admin role",
-            "type": "resource",
-            "logic": "POSITIVE",
-            "decisionStrategy": "UNANIMOUS",
-            "config": {
-              "resources": "[\"product-admin\"]",
-              "applyPolicies": "[\"admin\"]"
+              "applyPolicies": "[\"Admin Policy\"]"
             }
           },
           {
@@ -966,31 +925,7 @@
             "config": {
               "resources": "[\"client-resource\"]",
               "scopes": "[\"edit\"]",
-              "applyPolicies": "[\"operator\",\"admin\"]"
-            }
-          },
-          {
-            "id": "05f79e6c-7ce2-4022-aa1b-560fc49a56fb",
-            "name": "product-user",
-            "description": "A permission that applies to the product resource type with user role",
-            "type": "resource",
-            "logic": "POSITIVE",
-            "decisionStrategy": "UNANIMOUS",
-            "config": {
-              "resources": "[\"product-user\"]",
-              "applyPolicies": "[\"user\"]"
-            }
-          },
-          {
-            "id": "6e6ce908-0d26-4735-a064-c47c98c4468e",
-            "name": "product-operator",
-            "description": "A permission that applies to the product resource type with operator role",
-            "type": "resource",
-            "logic": "POSITIVE",
-            "decisionStrategy": "UNANIMOUS",
-            "config": {
-              "resources": "[\"product-operator\"]",
-              "applyPolicies": "[\"operator\"]"
+              "applyPolicies": "[\"Operator Policy\",\"Admin Policy\"]"
             }
           },
           {
@@ -1003,7 +938,59 @@
             "config": {
               "resources": "[\"client-resource\"]",
               "scopes": "[\"view\"]",
-              "applyPolicies": "[\"user\",\"operator\",\"admin\"]"
+              "applyPolicies": "[\"User Policy\",\"Operator Policy\",\"Admin Policy\"]"
+            }
+          },
+          {
+            "id": "03a6957b-a203-4ec4-9116-13c58616c725",
+            "name": "product-create",
+            "description": "A permission that applies to the product resource type for create scope",
+            "type": "scope",
+            "logic": "POSITIVE",
+            "decisionStrategy": "AFFIRMATIVE",
+            "config": {
+              "resources": "[\"product-resource\"]",
+              "scopes": "[\"create\"]",
+              "applyPolicies": "[\"Operator Policy\",\"Admin Policy\"]"
+            }
+          },
+          {
+            "id": "90f602f7-4429-4246-9c9d-d316aa352541",
+            "name": "product-delete",
+            "description": "A permission that applies to the product resource type for delete scope",
+            "type": "scope",
+            "logic": "POSITIVE",
+            "decisionStrategy": "AFFIRMATIVE",
+            "config": {
+              "resources": "[\"product-resource\"]",
+              "scopes": "[\"delete\"]",
+              "applyPolicies": "[\"Operator Policy\",\"Admin Policy\"]"
+            }
+          },
+          {
+            "id": "fbe334ed-1c2c-40a4-8922-e90b9ed9de2d",
+            "name": "product-edit",
+            "description": "A permission that applies to the product resource type for edit scope",
+            "type": "scope",
+            "logic": "POSITIVE",
+            "decisionStrategy": "AFFIRMATIVE",
+            "config": {
+              "resources": "[\"product-resource\"]",
+              "scopes": "[\"edit\"]",
+              "applyPolicies": "[\"Operator Policy\",\"Admin Policy\"]"
+            }
+          },
+          {
+            "id": "6c0cb32e-6e5f-42f5-8ac8-98784906877a",
+            "name": "product-view",
+            "description": "A permission that applies to the product resource type for view scope",
+            "type": "scope",
+            "logic": "POSITIVE",
+            "decisionStrategy": "AFFIRMATIVE",
+            "config": {
+              "resources": "[\"product-resource\"]",
+              "scopes": "[\"view\"]",
+              "applyPolicies": "[\"User Policy\",\"Operator Policy\",\"Admin Policy\"]"
             }
           }
         ],
@@ -1033,45 +1020,8 @@
       }
     },
     {
-      "id": "34ee99d0-2cad-448b-92d7-e4150c996692",
-      "clientId": "broker",
-      "name": "${client_broker}",
-      "surrogateAuthRequired": false,
-      "enabled": true,
-      "alwaysDisplayInConsole": false,
-      "clientAuthenticatorType": "client-secret",
-      "redirectUris": [],
-      "webOrigins": [],
-      "notBefore": 0,
-      "bearerOnly": true,
-      "consentRequired": false,
-      "standardFlowEnabled": true,
-      "implicitFlowEnabled": false,
-      "directAccessGrantsEnabled": false,
-      "serviceAccountsEnabled": false,
-      "publicClient": false,
-      "frontchannelLogout": false,
-      "protocol": "openid-connect",
-      "attributes": {},
-      "authenticationFlowBindingOverrides": {},
-      "fullScopeAllowed": false,
-      "nodeReRegistrationTimeout": 0,
-      "defaultClientScopes": [
-        "web-origins",
-        "roles",
-        "profile",
-        "email"
-      ],
-      "optionalClientScopes": [
-        "address",
-        "phone",
-        "offline_access",
-        "microprofile-jwt"
-      ]
-    },
-    {
       "id": "8ddedbe2-1fc1-45ec-aed2-5155513767a5",
-      "clientId": "frontend-permission",
+      "clientId": "poc-frontend",
       "rootUrl": "http://localhost:3000",
       "adminUrl": "http://localhost:3000",
       "surrogateAuthRequired": false,
@@ -1095,8 +1045,28 @@
       "frontchannelLogout": false,
       "protocol": "openid-connect",
       "attributes": {
+        "id.token.as.detached.signature": "false",
+        "saml.assertion.signature": "false",
+        "saml.force.post.binding": "false",
+        "saml.multivalued.roles": "false",
+        "saml.encrypt": "false",
+        "oauth2.device.authorization.grant.enabled": "false",
+        "backchannel.logout.revoke.offline.tokens": "false",
+        "saml.server.signature": "false",
+        "saml.server.signature.keyinfo.ext": "false",
+        "use.refresh.tokens": "true",
+        "exclude.session.state.from.auth.response": "false",
+        "oidc.ciba.grant.enabled": "false",
+        "saml.artifact.binding": "false",
         "backchannel.logout.session.required": "true",
-        "backchannel.logout.revoke.offline.tokens": "false"
+        "client_credentials.use_refresh_token": "false",
+        "saml_force_name_id_format": "false",
+        "require.pushed.authorization.requests": "false",
+        "saml.client.signature": "false",
+        "tls.client.certificate.bound.access.tokens": "false",
+        "saml.authnstatement": "false",
+        "display.on.consent.screen": "false",
+        "saml.onetimeuse.condition": "false"
       },
       "authenticationFlowBindingOverrides": {},
       "fullScopeAllowed": true,
@@ -1328,6 +1298,7 @@
           "consentRequired": false,
           "config": {
             "multivalued": "true",
+            "userinfo.token.claim": "true",
             "user.attribute": "foo",
             "id.token.claim": "true",
             "access.token.claim": "true",
@@ -1700,16 +1671,16 @@
     }
   ],
   "defaultDefaultClientScopes": [
-    "role_list",
-    "profile",
     "email",
-    "roles",
-    "web-origins"
+    "role_list",
+    "web-origins",
+    "profile",
+    "roles"
   ],
   "defaultOptionalClientScopes": [
     "offline_access",
-    "address",
     "phone",
+    "address",
     "microprofile-jwt"
   ],
   "browserSecurityHeaders": {
@@ -1741,14 +1712,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "oidc-usermodel-attribute-mapper",
             "oidc-sha256-pairwise-sub-mapper",
-            "oidc-full-name-mapper",
-            "oidc-usermodel-property-mapper",
-            "saml-user-property-mapper",
+            "oidc-usermodel-attribute-mapper",
             "oidc-address-mapper",
+            "saml-role-list-mapper",
+            "oidc-full-name-mapper",
+            "saml-user-property-mapper",
             "saml-user-attribute-mapper",
-            "saml-role-list-mapper"
+            "oidc-usermodel-property-mapper"
           ]
         }
       },
@@ -1815,13 +1786,13 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "oidc-usermodel-attribute-mapper",
-            "oidc-sha256-pairwise-sub-mapper",
             "saml-user-property-mapper",
-            "saml-role-list-mapper",
             "saml-user-attribute-mapper",
-            "oidc-usermodel-property-mapper",
             "oidc-address-mapper",
+            "oidc-sha256-pairwise-sub-mapper",
+            "saml-role-list-mapper",
+            "oidc-usermodel-property-mapper",
+            "oidc-usermodel-attribute-mapper",
             "oidc-full-name-mapper"
           ]
         }
@@ -1904,7 +1875,7 @@
   "supportedLocales": [],
   "authenticationFlows": [
     {
-      "id": "dd0f2995-0090-4f71-a909-9d40fc316926",
+      "id": "19ba6244-506f-4d4a-ae67-1ac3750cfae8",
       "alias": "Account verification options",
       "description": "Method with which to verity the existing account",
       "providerId": "basic-flow",
@@ -1930,7 +1901,7 @@
       ]
     },
     {
-      "id": "97b635e1-5e8e-44a6-855c-e19abe11111d",
+      "id": "778c9da2-1705-4d6d-a38a-4bc0e83dffd3",
       "alias": "Authentication Options",
       "description": "Authentication options.",
       "providerId": "basic-flow",
@@ -1964,7 +1935,7 @@
       ]
     },
     {
-      "id": "ca16d40f-33d9-4439-8e55-b98bcb819783",
+      "id": "e54dcacd-d107-4a15-8328-2baed38786cc",
       "alias": "Browser - Conditional OTP",
       "description": "Flow to determine if the OTP is required for the authentication",
       "providerId": "basic-flow",
@@ -1990,7 +1961,7 @@
       ]
     },
     {
-      "id": "0ee953ed-3854-4515-a727-6cf235dfb7b4",
+      "id": "5fb73f12-a92f-43cb-9fe8-05171114d9f1",
       "alias": "Direct Grant - Conditional OTP",
       "description": "Flow to determine if the OTP is required for the authentication",
       "providerId": "basic-flow",
@@ -2016,7 +1987,7 @@
       ]
     },
     {
-      "id": "0fe72797-b7d7-4c9b-9e37-0ea530726205",
+      "id": "2e6aa5eb-41c9-4590-804f-48e055655b53",
       "alias": "First broker login - Conditional OTP",
       "description": "Flow to determine if the OTP is required for the authentication",
       "providerId": "basic-flow",
@@ -2042,7 +2013,7 @@
       ]
     },
     {
-      "id": "aeb61a72-4373-4699-a059-100357c510da",
+      "id": "79bec86e-29e9-4983-91cd-9a6fd6942800",
       "alias": "Handle Existing Account",
       "description": "Handle what to do if there is existing account with same email/username like authenticated identity provider",
       "providerId": "basic-flow",
@@ -2068,7 +2039,7 @@
       ]
     },
     {
-      "id": "806db4a6-e0c3-4512-b6ec-d67309a61198",
+      "id": "a3a62edf-1010-4136-8b4a-6f7418e4f258",
       "alias": "Reset - Conditional OTP",
       "description": "Flow to determine if the OTP should be reset or not. Set to REQUIRED to force.",
       "providerId": "basic-flow",
@@ -2094,7 +2065,7 @@
       ]
     },
     {
-      "id": "4142cdc5-b303-4728-b84c-dbb4ba131ecb",
+      "id": "20802386-f55a-4996-8e34-13af2c7f8da1",
       "alias": "User creation or linking",
       "description": "Flow for the existing/non-existing user alternatives",
       "providerId": "basic-flow",
@@ -2121,7 +2092,7 @@
       ]
     },
     {
-      "id": "c83d5e5c-1f22-404d-a43b-8f026e86d9f0",
+      "id": "088520cf-c483-4346-91ee-8cfc9b5e8edb",
       "alias": "Verify Existing Account by Re-authentication",
       "description": "Reauthentication of existing account",
       "providerId": "basic-flow",
@@ -2147,7 +2118,7 @@
       ]
     },
     {
-      "id": "8c5b00b1-ed3d-49bf-a956-7c716cfcc3f0",
+      "id": "533082eb-9550-4895-9861-56c4bb713d34",
       "alias": "browser",
       "description": "browser based authentication",
       "providerId": "basic-flow",
@@ -2189,7 +2160,7 @@
       ]
     },
     {
-      "id": "053fbae5-a139-4c4b-8043-47a0e541a3bd",
+      "id": "5c4f0544-af78-4624-aa75-b8dc0ef6bd4a",
       "alias": "clients",
       "description": "Base authentication for clients",
       "providerId": "client-flow",
@@ -2231,7 +2202,7 @@
       ]
     },
     {
-      "id": "8db2b74f-8994-40b6-93f3-4bd23d66d7fd",
+      "id": "f20853ab-d152-461b-a020-8c5e1f0767c2",
       "alias": "direct grant",
       "description": "OpenID Connect Resource Owner Grant",
       "providerId": "basic-flow",
@@ -2265,7 +2236,7 @@
       ]
     },
     {
-      "id": "2e31f0ac-177b-40ed-9cf8-77b8375275a0",
+      "id": "0c44fee6-d9a1-4452-a3b2-284504446c08",
       "alias": "docker auth",
       "description": "Used by Docker clients to authenticate against the IDP",
       "providerId": "basic-flow",
@@ -2283,7 +2254,7 @@
       ]
     },
     {
-      "id": "a3dac766-1496-4690-ba89-ed42b07df2bb",
+      "id": "1d742a92-6cb3-4aae-9de2-3a8baf5a1f6c",
       "alias": "first broker login",
       "description": "Actions taken after first broker login with identity provider account, which is not yet linked to any Keycloak account",
       "providerId": "basic-flow",
@@ -2310,7 +2281,7 @@
       ]
     },
     {
-      "id": "6324c7a2-2fb4-411f-9c9e-8141033916b0",
+      "id": "094f7872-fb0e-423c-9f67-52cedb695294",
       "alias": "forms",
       "description": "Username, password, otp and other auth forms.",
       "providerId": "basic-flow",
@@ -2336,7 +2307,7 @@
       ]
     },
     {
-      "id": "533fad7e-6115-483d-84ab-c801dc3b9325",
+      "id": "f6a22563-cfab-4d56-b5ea-6e8a82df66f9",
       "alias": "http challenge",
       "description": "An authentication flow based on challenge-response HTTP Authentication Schemes",
       "providerId": "basic-flow",
@@ -2362,7 +2333,7 @@
       ]
     },
     {
-      "id": "14ae166a-e26a-40bc-9837-fcfe59007a97",
+      "id": "54a84794-868d-4a7b-9ba6-e6e5e7c06979",
       "alias": "registration",
       "description": "registration flow",
       "providerId": "basic-flow",
@@ -2381,7 +2352,7 @@
       ]
     },
     {
-      "id": "ada4a434-d308-4541-b9d8-9a474a989823",
+      "id": "6f3350d9-67c4-430f-82fd-689cc53886b3",
       "alias": "registration form",
       "description": "registration form",
       "providerId": "form-flow",
@@ -2423,7 +2394,7 @@
       ]
     },
     {
-      "id": "945fb1cd-8643-4b9c-8bf1-ab52627f5601",
+      "id": "2c90e4d9-ffb1-4e68-a050-f80c331c5c1a",
       "alias": "reset credentials",
       "description": "Reset credentials for a user if they forgot their password or something",
       "providerId": "basic-flow",
@@ -2465,7 +2436,7 @@
       ]
     },
     {
-      "id": "6ce2062a-3941-456c-abdd-60d2b621eed2",
+      "id": "30aa4c40-ed2c-49ca-9768-48dcf36a2dbf",
       "alias": "saml ecp",
       "description": "SAML ECP Profile Authentication Flow",
       "providerId": "basic-flow",
@@ -2485,14 +2456,14 @@
   ],
   "authenticatorConfig": [
     {
-      "id": "e0c57a79-e678-4a35-bc8f-4d7a84c0f982",
+      "id": "c01dd2e6-d34b-4343-8e73-46c003acb46e",
       "alias": "create unique user config",
       "config": {
         "require.password.update.after.registration": "false"
       }
     },
     {
-      "id": "dfed218e-12a2-44a3-bff4-e054f501255c",
+      "id": "ffff489a-4287-46c4-ae3e-81801303a054",
       "alias": "review profile config",
       "config": {
         "update.profile.on.first.login": "missing"
@@ -2575,8 +2546,8 @@
     "cibaExpiresIn": "120",
     "cibaAuthRequestedUserHint": "login_hint",
     "oauth2DeviceCodeLifespan": "600",
-    "oauth2DevicePollingInterval": "5",
     "clientOfflineSessionMaxLifespan": "0",
+    "oauth2DevicePollingInterval": "5",
     "clientSessionIdleTimeout": "0",
     "userProfileEnabled": "false",
     "parRequestUriLifespan": "60",

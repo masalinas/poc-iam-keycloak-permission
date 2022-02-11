@@ -1,0 +1,21 @@
+version: "3.9"
+
+services: 
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak-permission
+    volumes:
+      - ./config/realm:/opt/jboss/keycloak/imports
+    environment:
+      KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm-export.json -Dkeycloak.profile.feature.upload_scripts=enabled      
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: password
+    ports:        
+      - 8080:8080
+    networks:
+      - network-name
+  
+networks:
+  network-name:
+    name: poc
+      
